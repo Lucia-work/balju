@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>해피아이 정산 점검</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav class="pages"><a href="index.html">발주서 만들기</a><a href="jungsan.html" class="on">정산 점검</a></nav>
+    <h1 id="title">해피아이 정산 점검</h1>
+    <p class="privacy">🔒 올린 파일은 이 컴퓨터 안에서만 처리되고, 인터넷으로 전송되지 않습니다.</p>
+  </header>
+
+  <main>
+    <section class="step">
+      <h2><span class="badge">1</span> 파일을 올려주세요</h2>
+      <div class="uploads">
+        <div class="drop" id="drop-order" tabindex="0"><input type="file" accept=".xlsx,.xls" hidden></div>
+        <div class="drop" id="drop-settle" tabindex="0"><input type="file" accept=".xlsx,.xls" hidden></div>
+        <div class="drop small" id="drop-prices" tabindex="0"><input type="file" accept=".xlsx,.xls" hidden></div>
+      </div>
+      <p class="error" id="loadError" hidden></p>
+    </section>
+
+    <section class="step" id="scopeStep" hidden>
+      <h2><span class="badge">2</span> 점검할 구간</h2>
+      <p class="scope">
+        <select id="paymentSelect"></select>
+        <span id="scopeInfo"></span>
+      </p>
+      <div class="actions">
+        <button id="runBtn" class="primary">점검하기</button>
+        <button id="draftBtn" class="secondary" hidden>이 파일들로 단가 기준표 초안 만들기</button>
+      </div>
+    </section>
+
+    <section class="step" id="resultStep" hidden>
+      <h2><span class="badge">3</span> 결과</h2>
+      <div id="verdict" class="verdict"></div>
+      <div id="money" class="money"></div>
+      <ul id="boundary" class="boundary"></ul>
+      <div class="cards" id="cards"></div>
+      <button id="downloadBtn" class="primary">결과를 엑셀로 저장</button>
+      <h3 id="listTitle" class="list-title"></h3>
+      <p id="listHelp" class="list-help"></p>
+      <div class="table-wrap"><table id="resultTable"></table></div>
+    </section>
+  </main>
+
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+  <script src="config.js"></script>
+  <script src="settle.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
