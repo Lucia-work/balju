@@ -1,0 +1,5 @@
+# 실제 엄마 파일은 절대 올리지 않기
+실제파일/
+.DS_Store
+.claude/
+node_modules/

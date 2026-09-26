@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>미니미니멀 발주서 만들기</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav class="pages"><a href="index.html">정산 점검</a><a href="order.html" class="on">발주서 만들기</a></nav>
+    <h1 id="title">미니미니멀 발주서 만들기</h1>
+    <p class="privacy">🔒 올린 파일과 비밀번호는 이 컴퓨터 안에서만 쓰이고, 인터넷으로 전송되지 않습니다.</p>
+  </header>
+
+  <main>
+    <section class="step">
+      <h2><span class="badge">1</span> 쇼핑몰 주문 파일을 올려주세요</h2>
+      <div class="uploads order-uploads">
+        <div class="drop" id="drop" tabindex="0">
+          <input type="file" accept=".xlsx,.xls" multiple hidden>
+          <div class="drop-title">쇼핑몰 주문 파일</div>
+          <div class="drop-hint">스마트스토어(미니미니멀·깔꾸미) 발주발송관리, 오늘의집 주문배송 내역 — 여러 개 한꺼번에 올려도 돼요</div>
+          <div class="drop-file">여기에 끌어다 놓거나 <u>눌러서 선택</u></div>
+        </div>
+      </div>
+      <div class="drop locked" id="pwBox" hidden>
+        <div class="drop-title">🔑 비밀번호를 넣어주세요</div>
+        <div class="drop-hint" id="pwFile"></div>
+        <form class="pw-row" id="pwForm">
+          <input type="password" id="pwInput" autocomplete="off">
+          <button type="submit" class="secondary">열기</button>
+          <button type="button" id="pwSkip" class="secondary">이 파일 건너뛰기</button>
+          <label><input type="checkbox" id="pwRemember"> 이 컴퓨터에서 기억하기</label>
+        </form>
+      </div>
+      <ul class="file-list" id="fileList"></ul>
+      <p class="error" id="loadError" hidden></p>
+    </section>
+
+    <section class="step" id="resultStep" hidden>
+      <h2><span class="badge">2</span> 발주서 확인</h2>
+      <div id="teach"></div>
+      <div class="summary" id="summary"></div>
+      <ul class="notes" id="notes"></ul>
+      <button id="downloadBtn" class="primary">발주서 엑셀로 저장</button>
+      <p class="list-help" id="downloadHelp"></p>
+      <div class="table-wrap"><table id="resultTable"></table></div>
+    </section>
+
+    <div class="map-tools">
+      <span id="mapInfo"></span>
+      <button id="mapExport">변환표 엑셀로 저장</button>
+      <button id="mapImport">변환표 불러오기</button>
+      <input type="file" id="mapFile" accept=".xlsx" hidden>
+    </div>
+  </main>
+
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx-populate@1.21.0/browser/xlsx-populate.min.js"></script>
+  <script src="config.js"></script>
+  <script src="order.js"></script>
+  <script src="order-map.js"></script>
+  <script src="order-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "jungsan",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "devDependencies": {
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz",
+    "xlsx-populate": "^1.21.0"
+  }
+}
