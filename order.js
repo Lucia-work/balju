@@ -54,14 +54,17 @@
       .trim();
   }
 
-  // '... / 색상 선택: 화이트' → { base: '...', color: '색상 선택: 화이트' }
+  // 색상 라벨 통일: '색상 선택: 화이트', '컬러: 화이트' → '색상: 화이트' ('상판컬러'처럼 다른 뜻의 라벨은 그대로)
+  const unifyColorLabel = p => p.replace(/^(색상\s*선택|색상|컬러|색깔)\s*:/, '색상:');
+
+  // '... / 색상 선택: 화이트' → { base: '...', color: '색상: 화이트' }
   // 색상 부분은 변환표에 넣지 않고 그대로 뒤에 붙임 → 색상만 다른 건 따로 가르칠 필요 없음
   function splitColor(text) {
     const parts = clean(text).split(' / ').filter(Boolean);
     const isColor = (p, k) => k > 0 && COLOR_PART.test(p);
     return {
       base: parts.filter((p, k) => !isColor(p, k)).join(' / '),
-      color: parts.filter(isColor).join(' / '),
+      color: parts.filter(isColor).map(unifyColorLabel).join(' / '),
     };
   }
 

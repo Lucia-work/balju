@@ -40,10 +40,11 @@ test('글자 정리 — 이모지 빼고 띄어쓰기·/·: 모양 통일', () =
 
 test('색상 분리 — 색상·컬러 라벨은 뒤로, 첫 부분은 절대 색상 아님', () => {
   assert.deepStrictEqual(O.splitColor('🔽 틈새장: 1. 컨실 / ⏬ 가로폭 선택: 200 / ⏬ 색상 선택: 화이트'),
-    { base: '틈새장: 1. 컨실 / 가로폭 선택: 200', color: '색상 선택: 화이트' });
+    { base: '틈새장: 1. 컨실 / 가로폭 선택: 200', color: '색상: 화이트' }); // '색상 선택'도 '색상'으로 통일
   assert.deepStrictEqual(O.splitColor('아일랜드 식탁 1000 서랍형 / 상판컬러: 마블 / 프레임컬러: 화이트'),
     { base: '아일랜드 식탁 1000 서랍형', color: '상판컬러: 마블 / 프레임컬러: 화이트' });
   assert.deepStrictEqual(O.splitColor('추가상품 - 바퀴 추가(1EA)'), { base: '추가상품 - 바퀴 추가(1EA)', color: '' });
+  assert.strictEqual(O.splitColor('의자 / 컬러: 블랙').color, '색상: 블랙');
 });
 
 test('스마트스토어 — 변환표로 이름 바꾸고 색상 붙임, 수량 2는 2_1·2_2', () => {
@@ -55,7 +56,7 @@ test('스마트스토어 — 변환표로 이름 바꾸고 색상 붙임, 수량
   const r = O.convert(p.lines, MAP);
   assert.deepStrictEqual(r.unknown, []);
   assert.deepStrictEqual(r.out.map(o => [o.name, o.qty]), [
-    ['컨실 틈새장 200 높은형 / 색상 선택: 화이트', 1],
+    ['컨실 틈새장 200 높은형 / 색상: 화이트', 1],
     ['바퀴추가: 바퀴추가(1ea)', '2_1'],
     ['바퀴추가: 바퀴추가(1ea)', '2_2'],
   ]);
