@@ -76,11 +76,11 @@
     }
   }
 
-  // 기준표는 [상품명, 단가] 목록으로 브라우저에 기억
+  // 기준시트는 [상품명, 단가] 목록으로 브라우저에 기억
   function usePrices(list, meta) {
     state.prices = new Map(list.map(([name, price, since, prevPrice]) =>
       [Settle.productKey(name), { name, price, since: since ?? null, prevPrice: prevPrice ?? null }]));
-    markLoaded('prices', `✔ ${list.length}개 상품 (${esc(meta.file)}, ${esc(meta.date)} 저장)<br><u>새 기준표로 바꾸기</u>`);
+    markLoaded('prices', `✔ ${list.length}개 상품 (${esc(meta.file)}, ${esc(meta.date)} 저장)<br><u>새 기준시트로 바꾸기</u>`);
   }
 
   async function loadPrices(file) {
@@ -88,7 +88,7 @@
     try {
       const sheet = await readSheet(file);
       const table = Settle.parsePriceTable(sheet.rows);
-      if (!table || !table.size) throw new Error('기준표 형식 아님');
+      if (!table || !table.size) throw new Error('기준시트 형식 아님');
       const list = [...table.values()].map(v => [v.name, v.price, v.since, v.prevPrice]);
       const meta = { file: file.name, date: new Date().toLocaleDateString('ko-KR') };
       store('prices', { list, meta });
@@ -96,7 +96,7 @@
       renderScope();
     } catch (e) {
       console.error(e);
-      showError(`"${file.name}"에서 '상품명'과 '단가' 칸을 찾지 못했어요. 단가 기준표 파일이 맞는지 확인해 주세요.`);
+      showError(`"${file.name}"에서 '상품명'과 '단가' 칸을 찾지 못했어요. 단가 기준시트 파일이 맞는지 확인해 주세요.`);
     }
   }
 
@@ -142,7 +142,7 @@
   // ---------- 3. 점검 ----------
 
   $('#runBtn').addEventListener('click', () => {
-    if (!state.prices && !confirm('단가 기준표가 없어서 발주서 금액하고만 비교해요. 그래도 점검할까요?')) return;
+    if (!state.prices && !confirm('단가 기준시트가 없어서 발주서 금액하고만 비교해요. 그래도 점검할까요?')) return;
     const r = Settle.check(state.order.orders, state.settle.items, state.prices, selectedRange());
     r.findings.push(...r.okLines.map(s => ({ status: 'ok', s })));
     r.findings = r.findings.filter(f => ST[f.status]);
@@ -319,12 +319,12 @@
     await saveWorkbook(wb, `정산점검결과_${new Date().toISOString().slice(0, 10)}.xlsx`);
   });
 
-  // ---------- 기준표 초안 만들기 ----------
+  // ---------- 기준시트 초안 만들기 ----------
 
   $('#draftBtn').addEventListener('click', async () => {
     const draft = Settle.makePriceDraft(state.order.orders, state.settle.items);
     const wb = new ExcelJS.Workbook();
-    const ws = wb.addWorksheet('단가기준표');
+    const ws = wb.addWorksheet('단가기준시트');
     ws.columns = [
       { header: '상품명', width: 48 }, { header: '단가', width: 10 }, { header: '적용 시작일(참고)', width: 16 },
       { header: '이전 단가(참고)', width: 14 }, { header: '건수(참고)', width: 10 }, { header: '확인 필요', width: 18 },
@@ -337,7 +337,7 @@
     }
     ws.autoFilter = { from: 'A1', to: 'F1' };
     ws.views = [{ state: 'frozen', ySplit: 1 }];
-    await saveWorkbook(wb, '단가기준표_초안.xlsx');
-    alert(`단가 기준표 초안(${draft.length}개 상품)을 저장했어요.\n엑셀에서 단가를 확인·수정한 뒤, 위의 '단가 기준표' 칸에 올려주세요.`);
+    await saveWorkbook(wb, '단가기준시트_초안.xlsx');
+    alert(`단가 기준시트 초안(${draft.length}개 상품)을 저장했어요.\n엑셀에서 단가를 확인·수정한 뒤, 위의 '단가 기준시트' 칸에 올려주세요.`);
   });
 })();

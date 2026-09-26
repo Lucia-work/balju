@@ -17,7 +17,7 @@ test('실제 파일 — 원본 3개가 어머니 발주서 67줄과 같게 나�
 
   const lines = data.stores.flatMap(s => O.parseOrderFile(s.rows, s.firstRow).lines);
   const r = O.convert(lines, O.buildMap(DEFAULT_MAP));
-  assert.deepStrictEqual(r.unknown, [], '기본 변환표로 전부 바뀌어야 함');
+  assert.deepStrictEqual(r.unknown, [], '기본 제품명 기준시트로 전부 바뀌어야 함');
   assert.deepStrictEqual(r.skipped, []);
 
   const [header, ...body] = data.order.rows;

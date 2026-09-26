@@ -172,7 +172,7 @@
     return out;
   }
 
-  // ---------- 단가 기준표 ----------
+  // ---------- 단가 기준시트 ----------
 
   function parsePriceTable(rows) {
     let h = rows.findIndex(r => r && r.some(c => /상품/.test(str(c))) && r.some(c => /단가/.test(str(c))));
@@ -202,7 +202,7 @@
     return entry.price;
   }
 
-  // 지난 데이터로 기준표 초안 만들기: 상품별 가장 최근에 쓰인 단가
+  // 지난 데이터로 기준시트 초안 만들기: 상품별 가장 최근에 쓰인 단가
   function makePriceDraft(orders, settleItems) {
     const groups = new Map();
     const add = (key, name, day, price) => {

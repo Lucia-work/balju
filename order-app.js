@@ -14,7 +14,7 @@
     } catch (e) { return null; }
   }
 
-  // ---------- 변환표: 기본(order-map.js) + 어머니가 가르친 것(브라우저) ----------
+  // ---------- 제품명 기준시트: 기본(order-map.js) + 어머니가 가르친 것(브라우저) ----------
 
   const userEntries = () => store(MAP_KEY) || [];
   const currentMap = () => O.buildMap(window.ORDER_MAP_DEFAULT || [], userEntries());
@@ -25,7 +25,7 @@
   }
 
   function renderMapInfo() {
-    $('#mapInfo').textContent = `변환표 ${currentMap().size}개 (직접 가르친 것 ${userEntries().length}개)`;
+    $('#mapInfo').textContent = `제품명 기준시트 ${currentMap().size}개 (직접 가르친 것 ${userEntries().length}개)`;
   }
 
   // ---------- 1. 파일 올리기 ----------
@@ -269,12 +269,12 @@
     await saveWorkbook(wb, C.fileName(today()));
   });
 
-  // ---------- 변환표 백업 / 불러오기 ----------
+  // ---------- 제품명 기준시트 백업 / 불러오기 ----------
 
   $('#mapExport').addEventListener('click', async () => {
     const mine = O.buildMap(userEntries());
     const wb = new ExcelJS.Workbook();
-    const ws = wb.addWorksheet('변환표');
+    const ws = wb.addWorksheet('제품명 기준시트');
     ws.columns = [
       { header: '쇼핑몰', width: 12 }, { header: '쇼핑몰 옵션 (색상 뺀 부분)', width: 70 },
       { header: '발주서에 적는 이름', width: 40 }, { header: '출처', width: 10 },
@@ -282,7 +282,7 @@
     ws.getRow(1).font = { bold: true };
     for (const [k, e] of currentMap()) ws.addRow([e.mall, e.raw, e.name, mine.has(k) ? '직접' : '기본']);
     ws.views = [{ state: 'frozen', ySplit: 1 }];
-    await saveWorkbook(wb, `발주서_변환표_${today()}.xlsx`);
+    await saveWorkbook(wb, `제품명_기준시트_${today()}.xlsx`);
   });
 
   $('#mapImport').addEventListener('click', () => $('#mapFile').click());
@@ -295,9 +295,9 @@
       const rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1, defval: '' });
       const h = rows[0].map(String);
       const iMall = h.indexOf('쇼핑몰'), iRaw = h.findIndex(x => x.startsWith('쇼핑몰 옵션')), iName = h.indexOf('발주서에 적는 이름');
-      if (iRaw < 0 || iName < 0) throw new Error('변환표 파일이 아니에요 (이 화면의 [변환표 엑셀로 저장]으로 만든 파일을 올려주세요)');
+      if (iRaw < 0 || iName < 0) throw new Error('제품명 기준시트 파일이 아니에요 (이 화면의 [제품명 기준시트 엑셀로 저장]으로 만든 파일을 올려주세요)');
       const entries = rows.slice(1).map(r => ({ mall: r[iMall] || '미니미니멀', raw: r[iRaw], name: r[iName] })).filter(e => String(e.raw).trim());
-      if (!confirm(`변환표 ${entries.length}개를 불러올까요? 지금 브라우저에 기억된 것과 합쳐져요 (같은 옵션은 불러온 이름으로 바뀜).`)) return;
+      if (!confirm(`제품명 기준시트 ${entries.length}개를 불러올까요? 지금 브라우저에 기억된 것과 합쳐져요 (같은 옵션은 불러온 이름으로 바뀜).`)) return;
       teach(entries);
       run();
     } catch (e) {

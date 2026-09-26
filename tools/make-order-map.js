@@ -1,4 +1,4 @@
-// 실제파일/ 의 쇼핑몰 원본들 + 어머니가 만든 합본 발주서를 짝지어 기본 변환표(order-map.js)를 만듦
+// 실제파일/ 의 쇼핑몰 원본들 + 어머니가 만든 합본 발주서를 짝지어 기본 제품명 기준시트(order-map.js)를 만듦
 //   PW_SMARTSTORE=… PW_OHOU=… node tools/make-order-map.js
 // 이미 있는 order-map.js 에서 손으로 넣은 항목(auto 아닌 것)은 남김.
 const fs = require('fs');
@@ -56,7 +56,7 @@ function expand(e) {
   ].sort((a, b) => O.MALL_ORDER.indexOf(a.mall) - O.MALL_ORDER.indexOf(b.mall) || a.name.localeCompare(b.name, 'ko'));
 
   const body = merged.map(e => `  { mall: ${JSON.stringify(e.mall)}, raw: ${JSON.stringify(e.raw)}, name: ${JSON.stringify(e.name)}${e.auto ? ', auto: true' : ''} },`).join('\n');
-  fs.writeFileSync(file, `// 기본 변환표: 쇼핑몰 옵션(색상 뺀 부분) → 발주서에 적는 이름
+  fs.writeFileSync(file, `// 기본 제품명 기준시트: 쇼핑몰 옵션(색상 뺀 부분) → 발주서에 적는 이름
 // tools/make-order-map.js 로 만들고, 손으로 고쳐도 됨. 개인정보·단가는 없음 (쇼핑몰에 보이는 옵션 이름뿐).
 // auto: true = 실제 파일에서 본 것과 같은 모양으로 다른 폭·높이·방향을 미리 넣어 둔 것.
 // 어머니가 화면에서 가르친 것은 브라우저에 따로 저장되고 이 목록보다 우선함.
@@ -68,6 +68,6 @@ ${body}
   else root.ORDER_MAP_DEFAULT = list;
 })(typeof window !== 'undefined' ? window : globalThis);
 `);
-  console.log(`변환표 ${merged.length}개 저장 (실제로 배움 ${sure.size}, 같은 모양으로 늘림 ${merged.length - sure.size}, 짝 못 지은 줄 ${learned.skipped.length})`);
+  console.log(`제품명 기준시트 ${merged.length}개 저장 (실제로 배움 ${sure.size}, 같은 모양으로 늘림 ${merged.length - sure.size}, 짝 못 지은 줄 ${learned.skipped.length})`);
   for (const c of learned.conflicts) console.log('확인 필요:', c.why, '|', c.raw, '→', c.names.join(' / '));
 })();

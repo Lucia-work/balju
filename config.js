@@ -5,7 +5,7 @@ window.CONFIG = {
   files: {
     order: { label: '발주서', hint: '내가 보낸 발주 내역 (.xlsx)' },
     settle: { label: '해피아이 정산서', hint: '거래처가 보낸 정산 내역 (.xls)' },
-    prices: { label: '단가 기준표', hint: '처음 한 번만 올리면 기억해요' },
+    prices: { label: '단가 기준시트', hint: '처음 한 번만 올리면 기억해요' },
   },
 
   // 분류: 이름, 색 묶음(red 문제 / yellow 확인 / blue 참고 / green 정상), 설명
@@ -16,12 +16,12 @@ window.CONFIG = {
     price_wrong:      { group: 'red', label: '금액 틀림', help: '발주서 금액과 청구 금액이 달라요' },
     sum_error:        { group: 'red', label: '누계 계산 틀림', help: '적힌 누계가 더한 값과 달라요' },
 
-    price_vs_ref:     { group: 'yellow', label: '기준 단가와 다름', help: '발주서와는 같지만 기준표 단가와 달라요' },
-    order_price_diff: { group: 'yellow', label: '발주서 금액 다름', help: '청구 금액은 기준표와 같고, 발주서에 적힌 금액이 달라요' },
+    price_vs_ref:     { group: 'yellow', label: '기준 단가와 다름', help: '발주서와는 같지만 기준시트 단가와 달라요' },
+    order_price_diff: { group: 'yellow', label: '발주서 금액 다름', help: '청구 금액은 기준시트와 같고, 발주서에 적힌 금액이 달라요' },
     product_diff:     { group: 'yellow', label: '상품명 다름', help: '같은 사람 주문인데 상품이 다르게 적혀 있어요' },
     name_diff:        { group: 'yellow', label: '이름 다름', help: '같은 상품인데 받는 분 이름이나 연락처가 달라요' },
     cancel_mismatch:  { group: 'yellow', label: '정산서만 취소', help: '정산서엔 취소로 적혔는데 발주서엔 취소가 아니에요' },
-    no_ref:           { group: 'yellow', label: '기준표에 없음', help: '기준표에 없는 상품이에요 — 단가를 추가해 주세요' },
+    no_ref:           { group: 'yellow', label: '기준시트에 없음', help: '기준시트에 없는 상품이에요 — 단가를 추가해 주세요' },
 
     not_billed:       { group: 'blue', label: '발주했는데 청구 안 됨', help: '점검 기간 안의 발주인데 정산서에 없어요' },
     missing_payment:  { group: 'blue', label: '입금 줄 없이 누계 감소', help: '입금 줄이 빠진 것 같아요' },
@@ -29,7 +29,7 @@ window.CONFIG = {
     adjust:           { group: 'blue', label: '조정 내역', help: '취소·반품·차감 등 손으로 적은 줄 — 한 번 훑어보세요' },
     sum_note:         { group: 'blue', label: '참고', help: '' },
 
-    ok:               { group: 'green', label: '정상', help: '발주서·기준표와 모두 같아요' },
+    ok:               { group: 'green', label: '정상', help: '발주서·기준시트와 모두 같아요' },
   },
   groupOrder: ['red', 'yellow', 'blue', 'green'],
 

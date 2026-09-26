@@ -171,7 +171,7 @@ test('기준 단가 — 적용 시작일 전이면 이전 단가', () => {
   assert.strictEqual(S.refPriceOn(prices.get(S.productKey('침대 틈새장 600 높은형')), S.parseDay('2020-01-01')), 37000);
 });
 
-test('기준표 초안 — 최신 단가와 바뀐 날', () => {
+test('기준시트 초안 — 최신 단가와 바뀐 날', () => {
   const mk = (day, price) => ({ type: 'product', key: 'k', product: '바퀴추가: 바퀴추가(1ea)', day: S.parseDay(day), price });
   const items = [mk('2026-07-01', 3000), mk('2026-07-05', 3000), mk('2026-07-13', 1500), mk('2026-07-20', 1500), mk('2026-08-01', 1500)];
   const [d] = S.makePriceDraft([], items);
