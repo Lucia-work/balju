@@ -1,4 +1,4 @@
-// 발주서 만들기 규칙 테스트 (가짜 데이터)
+// 발주서 제품명 통일 규칙 테스트 (가짜 데이터)
 const test = require('node:test');
 const assert = require('node:assert');
 const O = require('../order.js');

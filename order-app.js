@@ -1,4 +1,4 @@
-// 발주서 만들기 화면: 주문 파일 올리기(비밀번호) → 변환 → 처음 보는 옵션 가르치기 → 엑셀 저장
+// 발주서 제품명 통일 화면: 주문 파일 올리기(비밀번호) → 변환 → 처음 보는 옵션 가르치기 → 엑셀 저장
 (function () {
   const C = window.CONFIG.order, O = window.OrderRules;
   const $ = s => document.querySelector(s);

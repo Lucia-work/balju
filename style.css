@@ -85,7 +85,7 @@ tbody tr td { color: var(--text); }
 .pages a { font-size: 17px; padding: 8px 18px; border-radius: 999px; border: 2px solid var(--accent); color: var(--accent); text-decoration: none; background: #fff; }
 .pages a.on { background: var(--accent); color: #fff; }
 
-/* 발주서 만들기 */
+/* 발주서 제품명 통일 */
 .order-uploads { grid-template-columns: 1fr; }
 .drop.locked { border-style: solid; border-color: var(--yellow-ink); background: var(--yellow); cursor: default; }
 .pw-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 10px; justify-content: center; }
